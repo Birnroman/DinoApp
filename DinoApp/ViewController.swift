@@ -58,7 +58,11 @@ class ViewController: UIViewController {
     let button = UIButton()
     button.setTitle("Таблица", for: .normal)
     button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
-    button.backgroundColor = .purple
+    button.backgroundColor = UIColor(
+      red: 63/255,
+      green: 65/255,
+      blue: 195/255,
+      alpha: 1.0)
     button.layer.cornerRadius = 22
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
@@ -70,8 +74,25 @@ class ViewController: UIViewController {
     let button = UIButton()
     button.setTitle("Коллекция", for: .normal)
     button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
-    button.backgroundColor = .blue
+    button.backgroundColor = UIColor(
+      red: 141/255,
+      green: 61/255,
+      blue: 167/255,
+      alpha: 1.0)
     button.layer.cornerRadius = 22
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
+    
+    return button
+  }()
+  
+  lazy var helpButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("Ой, сложно. Хелп", for: .normal)
+    button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+    button.setTitleColor(.black, for: .normal)
+    button.backgroundColor = .white
+    button.layer.cornerRadius = 12
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
     
@@ -88,6 +109,8 @@ class ViewController: UIViewController {
     buttonsBlockView.contentView.addSubview(whereLabel)
     buttonsBlockView.contentView.addSubview(tableButton)
     buttonsBlockView.contentView.addSubview(collectionButton)
+    
+    view.addSubview(helpButton)
     
     setupLayout()
     
@@ -126,6 +149,12 @@ class ViewController: UIViewController {
       collectionButton.trailingAnchor.constraint(equalTo: buttonsBlockView.trailingAnchor, constant: -30),
       collectionButton.heightAnchor.constraint(equalToConstant: 68),
       collectionButton.bottomAnchor.constraint(equalTo: buttonsBlockView.bottomAnchor, constant: -30),
+      
+      helpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+      helpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+      helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+      helpButton.heightAnchor.constraint(equalToConstant: 50),
+
       
     ])
     
