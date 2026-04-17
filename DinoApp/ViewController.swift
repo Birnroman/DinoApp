@@ -58,11 +58,7 @@ class ViewController: UIViewController {
     let button = UIButton()
     button.setTitle("Таблица", for: .normal)
     button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
-    button.backgroundColor = UIColor(
-      red: 63/255,
-      green: 65/255,
-      blue: 195/255,
-      alpha: 1.0)
+    button.backgroundColor = UIColor(named: "buttonPrimary")
     button.layer.cornerRadius = 22
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
@@ -74,11 +70,7 @@ class ViewController: UIViewController {
     let button = UIButton()
     button.setTitle("Коллекция", for: .normal)
     button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
-    button.backgroundColor = UIColor(
-      red: 141/255,
-      green: 61/255,
-      blue: 167/255,
-      alpha: 1.0)
+    button.backgroundColor = UIColor(named: "buttonSecondary")
     button.layer.cornerRadius = 22
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
