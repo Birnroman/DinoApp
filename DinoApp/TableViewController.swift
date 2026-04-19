@@ -10,9 +10,12 @@ class TableViewController: UIViewController {
     return button
   }()
   
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .purple
+    setupHeaderStyle()
+    
     view.addSubview(button)
     setupLayout()
   }
@@ -26,5 +29,14 @@ class TableViewController: UIViewController {
       button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
     ])
+  }
+  
+  func setupHeaderStyle() {
+    view.backgroundColor = .purple
+    navigationItem.title = "Террариум"
+    navigationController?.navigationBar.prefersLargeTitles = true
+    navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    navigationController?.navigationBar.tintColor = .white
   }
 }
