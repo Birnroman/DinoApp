@@ -7,6 +7,7 @@ class DinoTableViewCell: UITableViewCell {
     lazy var dinoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "dino_icon")
+        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -30,6 +31,9 @@ class DinoTableViewCell: UITableViewCell {
     lazy var rightArrowImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "chevron.right")
+        image.tintColor = .white
+        image.contentMode = .scaleAspectFit
+
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -51,22 +55,23 @@ class DinoTableViewCell: UITableViewCell {
     func setupLayout() {
         let mainStackView = UIStackView(arrangedSubviews: [dinoImage, dinoNameLabel, dinoTypeLabel])
         mainStackView.axis = .horizontal
-        mainStackView.distribution = .equalCentering
+        mainStackView.distribution = .equalSpacing
+        mainStackView.spacing = 8
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(mainStackView)
         contentView.addSubview(rightArrowImage)
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            rightArrowImage.heightAnchor.constraint(equalToConstant: 30),
-            rightArrowImage.widthAnchor.constraint(equalToConstant: 30),
-            rightArrowImage.topAnchor.constraint(equalTo: contentView.topAnchor),
+            rightArrowImage.heightAnchor.constraint(equalToConstant: 18),
+            rightArrowImage.widthAnchor.constraint(equalToConstant: 18),
+            rightArrowImage.centerYAnchor.constraint(equalTo: mainStackView.centerYAnchor),
 
-            rightArrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            rightArrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
         ])
     }
 }

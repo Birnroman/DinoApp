@@ -34,6 +34,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.backgroundColor = .black
+        table.separatorStyle = .singleLine
+        table.separatorColor = UIColor(white: 1, alpha: 0.2)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
