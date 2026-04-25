@@ -4,6 +4,8 @@ struct Dino {
     let name: String
     let type: DinoType
     let image: String
+    let description: String
+    let color: String
 }
 
 enum DinoType: String {
@@ -13,15 +15,7 @@ enum DinoType: String {
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    let dinos: [Dino] = [
-        Dino(name: "Тираннозавр", type: .predator, image: ""),
-        Dino(name: "Трицератопс", type: .herbivore, image: ""),
-        Dino(name: "Стегозавр", type: .herbivore, image: ""),
-        Dino(name: "Брахиозавр", type: .herbivore, image: ""),
-        Dino(name: "Велоцираптор", type: .predator, image: ""),
-        
-    ]
+    let dinos = DinoService.sharedDinos
     
     lazy var button: UIButton = {
         let button = UIButton()
@@ -42,6 +36,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         table.register(DinoTableViewCell.self, forCellReuseIdentifier: DinoTableViewCell.reuseIdenifier)
         return table
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
