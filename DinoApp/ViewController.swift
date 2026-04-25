@@ -102,7 +102,9 @@ class ViewController: UIViewController {
     }
     
     @objc func goToDetail() {
-        navigationController?.pushViewController(DetailViewController(), animated: true)
+        let detailController = DetailViewController()
+        detailController.dino = dinos.randomElement()
+        navigationController?.pushViewController(detailController, animated: true)
     }
     
     func setupLayout() {

@@ -30,6 +30,15 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let currentDino = dino {
+            dinoLargeImage.image = UIImage(named: currentDino.image)
+            dinoLargeImage.layer.shadowColor = UIColor(named: currentDino.color)?.cgColor
+            navigationItem.title = dino?.name
+        }
+        
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+        
         view.backgroundColor = UIColor(named: "darkBackground")
         view.addSubview(dinoLargeImage)
         view.addSubview(dinoDescriptionLabel)
