@@ -1,29 +1,9 @@
 import UIKit
 
-struct Dino {
-    let name: String
-    let type: DinoType
-    let image: String
-    let description: String
-    let color: String
-}
-
-enum DinoType: String {
-    case predator = "Хищник"
-    case herbivore = "Травоядный"
-}
-
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let dinos = DinoService.sharedDinos
     
-    lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Go to Detail", for: .normal)
-        button.addTarget(self, action: #selector(goToDetail), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -44,12 +24,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         view.addSubview(tableView)
         setupLayout()
-        
     }
     
-    @objc func goToDetail() {
-        navigationController?.pushViewController(DetailViewController(), animated: true)
-    }
     
     func setupLayout() {
         NSLayoutConstraint.activate([
@@ -72,6 +48,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 extension TableViewController {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dinos.count
     }
@@ -82,6 +59,12 @@ extension TableViewController {
         let dino = dinos[indexPath.row]
         cell.configureCell(with: dino)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = DetailViewController()
+        detailController.dino = dinos[indexPath.row]
+        navigationController?.pushViewController(detailController, animated: true)
     }
 }
 
