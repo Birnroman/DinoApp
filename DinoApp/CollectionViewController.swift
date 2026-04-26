@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         view.addSubview(collectionView)
         setupLayout()
-        
+        setupHeaderStyle()
     }
     
     func setupLayout() {
@@ -40,6 +40,14 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         ])
     }
     
+    func setupHeaderStyle() {
+        view.backgroundColor = .black
+        navigationItem.title = "Галерея"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+    }
     
 }
 
@@ -55,5 +63,11 @@ extension CollectionViewController {
         let dino = dinos[indexPath.item]
         cell.configureCell(with: dino)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailController = DetailViewController()
+        detailController.dino = dinos[indexPath.item]
+        navigationController?.pushViewController(detailController, animated: true)
     }
 }

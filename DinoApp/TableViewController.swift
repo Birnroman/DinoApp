@@ -38,7 +38,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setupHeaderStyle() {
-        view.backgroundColor = .purple
         navigationItem.title = "Террариум"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
