@@ -8,8 +8,7 @@ class DetailViewController: UIViewController {
     
     lazy var dinoLargeImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "dino10")
-        image.layer.shadowColor = CGColor(red: 104/255, green: 67/255, blue: 237/255, alpha: 1)
+
         image.layer.shadowRadius = 80
         image.layer.shadowOpacity = 1
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +19,7 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.text = "Огромные челюсти, крошечные лапки, статус «короля»."
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .medium)
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,20 +29,11 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentDino = dino {
-            dinoLargeImage.image = UIImage(named: currentDino.image)
-            dinoLargeImage.layer.shadowColor = UIColor(named: currentDino.color)?.cgColor
-            navigationItem.title = dino?.name
-        }
-        
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.tintColor = .white
-        
-        view.backgroundColor = UIColor(named: "darkBackground")
         view.addSubview(dinoLargeImage)
         view.addSubview(dinoDescriptionLabel)
 
         setupLayout()
+        setupHeaderStyle()
     }
     
     func setupLayout() {
@@ -58,6 +48,21 @@ class DetailViewController: UIViewController {
             dinoDescriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             
         ])
+    }
+    func setupHeaderStyle() {
+        if let currentDino = dino {
+            dinoLargeImage.image = UIImage(named: currentDino.image)
+            dinoLargeImage.layer.shadowColor = UIColor(named: currentDino.color)?.cgColor
+            navigationItem.title = dino?.name
+            dinoDescriptionLabel.text = dino?.description
+        }
+        
+        view.backgroundColor = .black
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
     }
     
 }

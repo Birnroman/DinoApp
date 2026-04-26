@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         button.backgroundColor = UIColor(named: "buttonSecondary")
         button.layer.cornerRadius = 22
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToCollection), for: .touchUpInside)
         
         return button
     }()
@@ -99,6 +99,10 @@ class ViewController: UIViewController {
     
     @objc func goToSecond() {
         navigationController?.pushViewController(TableViewController(), animated: true)
+    }
+    
+    @objc func goToCollection() {
+        navigationController?.pushViewController(CollectionViewController(), animated: true)
     }
     
     @objc func goToDetail() {
