@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         button.backgroundColor = .white
         button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(goToDetail), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToHelp), for: .touchUpInside)
         
         return button
     }()
@@ -105,10 +105,16 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(CollectionViewController(), animated: true)
     }
     
-    @objc func goToDetail() {
-        let detailController = DetailViewController()
-        detailController.dino = dinos.randomElement()
-        navigationController?.pushViewController(detailController, animated: true)
+    @objc func goToHelp() {
+        let detailController = HelpViewController()
+        
+        if let sheet = detailController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+//            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        }
+        
+        present(detailController, animated: true)
     }
     
     func setupLayout() {
