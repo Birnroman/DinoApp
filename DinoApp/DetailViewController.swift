@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.text = "Огромные челюсти, крошечные лапки, статус «короля»."
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .medium)
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

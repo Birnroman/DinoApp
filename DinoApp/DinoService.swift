@@ -11,9 +11,9 @@ class DinoService {
         
         Dino(
             name: "Тираннозавр",
-            type: .herbivore,
+            type: .predator,
             image: "dino2",
-            description: "Три рога на голове и мощный костяной «воротник».",
+            description: "Огромные челюсти, крошечные лапки, статус «короля».",
             color: "dinoShadow_peach"),
         
         Dino(

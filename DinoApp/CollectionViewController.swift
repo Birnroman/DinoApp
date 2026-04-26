@@ -47,6 +47,8 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
+        
+        
     }
     
 }
