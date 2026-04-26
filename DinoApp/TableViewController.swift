@@ -47,7 +47,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 }
 
-extension TableViewController {
+extension TableViewController  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dinos.count
