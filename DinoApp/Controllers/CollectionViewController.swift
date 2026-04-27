@@ -4,9 +4,9 @@ import UIKit
 
 class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    let dinos = DinoService.sharedDinos
+    private let dinos = DinoService.sharedDinos
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let spacing: CGFloat = 12
@@ -31,7 +31,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         setupHeaderStyle()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
@@ -40,7 +40,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         ])
     }
     
-    func setupHeaderStyle() {
+    private func setupHeaderStyle() {
         view.backgroundColor = .black
         navigationItem.title = "Галерея"
         navigationController?.navigationBar.prefersLargeTitles = true

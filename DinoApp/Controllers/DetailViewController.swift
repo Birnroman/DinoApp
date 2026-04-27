@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
         setupHeaderStyle()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             dinoLargeImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             dinoLargeImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -49,7 +49,8 @@ class DetailViewController: UIViewController {
             
         ])
     }
-    func setupHeaderStyle() {
+    
+    private func setupHeaderStyle() {
         if let currentDino = dino {
             dinoLargeImage.image = UIImage(named: currentDino.image)
             dinoLargeImage.layer.shadowColor = UIColor(named: currentDino.color)?.cgColor

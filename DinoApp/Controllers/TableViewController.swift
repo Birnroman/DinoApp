@@ -2,10 +2,10 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let dinos = DinoService.sharedDinos
+    private let dinos = DinoService.sharedDinos
     
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.backgroundColor = .black
         table.separatorStyle = .singleLine
@@ -27,7 +27,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -37,7 +37,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ])
     }
     
-    func setupHeaderStyle() {
+    private func setupHeaderStyle() {
         navigationItem.title = "Террариум"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]

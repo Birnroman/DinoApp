@@ -3,7 +3,7 @@ import UIKit
 
 class HelpViewController: UIViewController {
 
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Какие варианты?"
         label.textColor = .white
@@ -12,7 +12,7 @@ class HelpViewController: UIViewController {
         return label
     }()
     
-    lazy var subtitleLabel: UILabel = {
+    private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Тут всё нехитро"
         label.textColor = .white
@@ -21,7 +21,7 @@ class HelpViewController: UIViewController {
         return label
     }()
     
-    lazy var mainStack: UIStackView = {
+    private lazy var mainStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 24
@@ -40,7 +40,7 @@ class HelpViewController: UIViewController {
         setupLayout()
     }
     
-    func createListRow(number: String, text: String) -> UIView {
+    private func createListRow(number: String, text: String) -> UIView {
         let circleView = UIView()
         circleView.backgroundColor = UIColor.buttonSecondary
         circleView.layer.cornerRadius = 24
@@ -78,7 +78,7 @@ class HelpViewController: UIViewController {
         return rowStack
     }
     
-    func setupListData() {
+    private func setupListData() {
         let firstRow = createListRow(number: "1", text: "Если выбрать таблицу, вы перейдете в Террариум, откуда можно посмотреть  детали")
         let secondRow = createListRow(number: "2", text: "Если выбрать коллекцию, вы перейдете в Галерею, откуда по клику снова на страницу с подробностями")
 
@@ -87,7 +87,7 @@ class HelpViewController: UIViewController {
 
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),

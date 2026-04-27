@@ -3,9 +3,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let dinos = DinoService.sharedDinos
+    private let dinos = DinoService.sharedDinos
     
-    lazy var backgoundImageView: UIImageView = {
+    private lazy var backgoundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "background")
         imageView.contentMode = .scaleAspectFill
@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    lazy var topImagesStackView: UIStackView = {
+    private lazy var topImagesStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = -20
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    lazy var buttonsBlockView: UIVisualEffectView = {
+    private lazy var buttonsBlockView: UIVisualEffectView = {
         let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
         view.clipsToBounds = true
         view.layer.cornerRadius = 32
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         return view
     }()
     
-    lazy var whereLabel: UILabel = {
+    private lazy var whereLabel: UILabel = {
         let label = UILabel()
         label.text = "Куда перейти?"
         label.textColor = .white
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    lazy var tableButton: UIButton = {
+    private lazy var tableButton: UIButton = {
         let button = UIButton()
         button.setTitle("Таблица", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    lazy var collectionButton: UIButton = {
+    private lazy var collectionButton: UIButton = {
         let button = UIButton()
         button.setTitle("Коллекция", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .medium)
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    lazy var helpButton: UIButton = {
+    private lazy var helpButton: UIButton = {
         let button = UIButton()
         button.setTitle("Ой, сложно. Хелп", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
@@ -111,13 +111,12 @@ class ViewController: UIViewController {
         if let sheet = detailController.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
-//            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
         }
         
         present(detailController, animated: true)
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             
             backgoundImageView.topAnchor.constraint(equalTo: view.topAnchor),
