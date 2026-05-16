@@ -3,7 +3,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let dinos = DinoService.sharedDinos
+    private let dinos: [Dino] = []
     
     private lazy var backgoundImageView: UIImageView = {
         let imageView = UIImageView()
