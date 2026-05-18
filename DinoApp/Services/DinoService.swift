@@ -7,7 +7,7 @@ final class DinoService {
     private init() {}
     
     func fetchDinos(completion: @escaping (Result<[Dino], Error>) -> Void) {
-        guard let url = URL(string: "https://dino-api.free.beeceptor.com") else { return }
+        guard let url = URL(string: "https://dino-api.free.beeceptor.com/dinos") else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 DispatchQueue.main.async {
