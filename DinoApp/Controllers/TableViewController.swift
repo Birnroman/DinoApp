@@ -2,7 +2,7 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private var dinos: [Dino] = []
+    var dinos: [Dino] = []
     
     
     private lazy var tableView: UITableView = {
@@ -25,7 +25,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.addSubview(tableView)
         setupLayout()
         
-        loadData()
+//        loadData()
     }
     
     
@@ -47,17 +47,17 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.navigationBar.tintColor = .white
     }
     
-    private func loadData() {
-        DinoService.shared.fetchDinos { [weak self] result in
-            switch result {
-            case .success(let fetchedDinos):
-                self?.dinos = fetchedDinos
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print("Возникла ошибка: \(error)")
-            }
-        }
-    }
+//    private func loadData() {
+//        DinoService.shared.fetchDinos { [weak self] result in
+//            switch result {
+//            case .success(let fetchedDinos):
+//                self?.dinos = fetchedDinos
+//                self?.tableView.reloadData()
+//            case .failure(let error):
+//                print("Возникла ошибка: \(error)")
+//            }
+//        }
+//    }
 }
 
 extension TableViewController  {

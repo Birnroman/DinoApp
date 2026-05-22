@@ -41,7 +41,7 @@ class DinoCollectionViewCell: UICollectionViewCell {
     func configureCell(with dino: Dino) {
         dinoNameLabel.text = dino.name
         dinoTypeLabel.text = dino.type.rawValue
-        dinoImage.image = UIImage(named: dino.image)
+        dinoImage.loadImage(from: dino.image)
     }
     
     func setupLayout() {

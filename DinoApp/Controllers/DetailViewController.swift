@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
     
     private func setupHeaderStyle() {
         if let currentDino = dino {
-            dinoLargeImage.image = UIImage(named: currentDino.image)
+            dinoLargeImage.loadImage(from: currentDino.image)
             dinoLargeImage.layer.shadowColor = UIColor(named: currentDino.color)?.cgColor
             navigationItem.title = dino?.name
             dinoDescriptionLabel.text = dino?.description
