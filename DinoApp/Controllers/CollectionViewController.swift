@@ -4,7 +4,7 @@ import UIKit
 
 class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    private let dinos = DinoService.sharedDinos
+    var dinos: [Dino] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -55,7 +55,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
 
 extension CollectionViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DinoService.sharedDinos.count
+        return dinos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -3,7 +3,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let dinos = DinoService.sharedDinos
+    private var loadedDinos: [Dino] = []
     
     private lazy var backgoundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         button.backgroundColor = UIColor(named: "buttonPrimary")
         button.layer.cornerRadius = 22
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(goToSecond), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToTable), for: .touchUpInside)
         
         return button
     }()
@@ -92,17 +92,21 @@ class ViewController: UIViewController {
         buttonsBlockView.contentView.addSubview(collectionButton)
         
         view.addSubview(helpButton)
-        
+        loadData()
         setupLayout()
         
     }
     
-    @objc func goToSecond() {
-        navigationController?.pushViewController(TableViewController(), animated: true)
+    @objc func goToTable() {
+        let tableVC = TableViewController()
+        tableVC.dinos = self.loadedDinos
+        navigationController?.pushViewController(tableVC, animated: true)
     }
     
     @objc func goToCollection() {
-        navigationController?.pushViewController(CollectionViewController(), animated: true)
+        let collectionVC = CollectionViewController()
+        collectionVC.dinos = self.loadedDinos
+        navigationController?.pushViewController(collectionVC, animated: true)
     }
     
     @objc func goToHelp() {
@@ -126,7 +130,8 @@ class ViewController: UIViewController {
             
             topImagesStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             topImagesStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
+
             buttonsBlockView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             buttonsBlockView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             buttonsBlockView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -150,18 +155,62 @@ class ViewController: UIViewController {
             helpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             helpButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            
         ])
         
-        dinos.prefix(3).forEach { dino in
-            let imageView = UIImageView(image: UIImage(named: dino.image))
-            imageView.contentMode = .scaleAspectFill
-            imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-            imageView.layer.cornerRadius = 40
-            imageView.clipsToBounds = true
-            topImagesStackView.addArrangedSubview(imageView)
+
+    }
+    
+    private func loadData() {
+        DinoService.shared.fetchDinos { [weak self] result in
+            switch result {
+            case .success(let dinos):
+                self?.loadedDinos = dinos
+                self?.setupPreviews()
+            case .failure(let error):
+                print("Ошибка: \(error)")
+            }
         }
+    }
+    
+    private func setupPreviews() {
+        loadedDinos.prefix(3).forEach { dino in
+            let imageView = UIImageView()
+
+            
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.layer.cornerRadius = 40
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            
+            imageView.loadImage(from: dino.image)
+            
+            topImagesStackView.addArrangedSubview(imageView)
+            
+            
+            NSLayoutConstraint.activate([
+                imageView.widthAnchor.constraint(equalToConstant: 80),
+                imageView.heightAnchor.constraint(equalToConstant: 80)
+            ])
+        }
+    }
+}
+
+extension UIImageView {
+    func loadImage(from urlString: String) {
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            
+            if let error = error {
+                print("Ошибка загрузки: \(error)")
+            }
+            
+            guard let data = data, let downloadedImage = UIImage(data: data) else { return }
+            
+            DispatchQueue.main.async {
+                self?.image = downloadedImage
+            }
+        }.resume()
     }
 }

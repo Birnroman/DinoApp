@@ -1,6 +1,6 @@
 import Foundation
 
-struct Dino {
+struct Dino: Codable {
     let name: String
     let type: DinoType
     let image: String
