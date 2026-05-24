@@ -130,8 +130,8 @@ class ViewController: UIViewController {
             
             topImagesStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             topImagesStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-
+            
+            
             buttonsBlockView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             buttonsBlockView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             buttonsBlockView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -157,7 +157,7 @@ class ViewController: UIViewController {
             helpButton.heightAnchor.constraint(equalToConstant: 50),
         ])
         
-
+        
     }
     
     private func loadData() {
@@ -175,7 +175,7 @@ class ViewController: UIViewController {
     private func setupPreviews() {
         loadedDinos.prefix(3).forEach { dino in
             let imageView = UIImageView()
-
+            
             
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
@@ -196,18 +196,24 @@ class ViewController: UIViewController {
 }
 
 extension UIImageView {
+    
+    private static let imageCache = NSCache<NSURL, UIImage>()
+    
     func loadImage(from urlString: String) {
         
         guard let url = URL(string: urlString) else { return }
+        let cacheKey = url as NSURL
+        if let cachedImage = UIImageView.imageCache.object(forKey: cacheKey) {
+            self.image = cachedImage
+            return
+        }
         
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            
             if let error = error {
                 print("Ошибка загрузки: \(error)")
             }
-            
             guard let data = data, let downloadedImage = UIImage(data: data) else { return }
-            
+            UIImageView.imageCache.setObject(downloadedImage, forKey: cacheKey)
             DispatchQueue.main.async {
                 self?.image = downloadedImage
             }
